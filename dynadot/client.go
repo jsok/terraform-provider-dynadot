@@ -1,10 +1,5 @@
 package dynadot
 
-type DomainInfo struct {
-	Name        string
-	NameServers []string
-}
-
 func NewClient(apiUrl, apiKey string) (Client, error) {
 	return &client{apiUrl, apiKey}, nil
 }
