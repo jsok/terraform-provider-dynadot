@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/jsok/terraform-provider-dynadot.svg?branch=master)](https://travis-ci.org/jsok/terraform-provider-dynadot)
 
+**NOTE** This provider is non-functional and of alpha quality. The API below is not implemented.
+
 # Terraform Dynadot provider
 
 A Terraform provider plugin to manage nameservers for domains registered
