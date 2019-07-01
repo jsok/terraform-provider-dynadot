@@ -1,11 +1,12 @@
 package main
 
 import (
+	"github.com/codewise/terraform-provider-dynadot/dynadot"
 	"github.com/hashicorp/terraform/helper/schema"
-	"github.com/jsok/terraform-provider-dynadot/dynadot"
+	"github.com/hashicorp/terraform/terraform"
 )
 
-func Provider() *schema.Provider {
+func DynadotProvider() terraform.ResourceProvider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"api_url": &schema.Schema{

@@ -1,0 +1,6 @@
++ Add terraform acceptance tests (live data?, mock server?) https://www.terraform.io/docs/extend/testing/acceptance-tests/index.html
+    - https://github.com/jarcoal/httpmock
+    - live requests working only from IPs whitelisted on Dynadot side
+? Extract dynadot api client into its own subproject?
+? Release binary form https://github.com/goreleaser/goreleaser
+? Opensourcing in codewise-oss

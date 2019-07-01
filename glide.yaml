@@ -1,8 +1,0 @@
-package: github.com/jsok/terraform-provider-dynadot
-import:
-- package: github.com/hashicorp/terraform
-  version: ~v0.6.0
-  subpackages:
-  - helper/schema
-  - plugin
-  - terraform

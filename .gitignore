@@ -1,2 +1,6 @@
+.idea/
+*.iml
+
 terraform-provider-dynadot
 vendor/*
+example/terraform.tfstate*

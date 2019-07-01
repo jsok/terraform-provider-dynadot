@@ -1,7 +1,3 @@
-[![Build Status](https://travis-ci.org/jsok/terraform-provider-dynadot.svg?branch=master)](https://travis-ci.org/jsok/terraform-provider-dynadot)
-
-**NOTE** This provider is non-functional and of alpha quality. The API below is not implemented.
-
 # Terraform Dynadot provider
 
 A Terraform provider plugin to manage nameservers for domains registered
@@ -36,7 +32,7 @@ The following arguments are supported:
 
 ### `dynadot_domain_nameservers`
 
-Set the nameservers of a domain.
+Set the nameservers of a domain. Upon destroying this resource the domain's DNS settings will be set to "Dynadot Parking".
 
 ```hcl
 resource "dynadot_domain_nameservers" "example_com" {
@@ -55,7 +51,27 @@ The following arguments are supported:
  * `domain` - (*Required*) The domain name you want to set nameservers for.
  * `nameservers` - (*Required*) A string list of nameservers, maximum of 13
    nameservers.
+   
+   
+## Plugin installation guide
 
-The domain you are attempting to set nameservers for must have the
-"Name Server Setting" set to "Name Servers", if it is set to something else
-e.g. "Dynadot Parking", this resource will fail.
+[As of now](https://github.com/hashicorp/terraform/issues/15252) Terraform doesn't support third party plugin distribution servers.
+ 
+Currently to install a custom or unsupported third-party binary, you have a few options:
+
+* Install the provider binary to $HOME/.terraform.d/plugins (or windows equivalent) ([documented here](https://www.terraform.io/docs/configuration/providers.html#third-party-plugins)).
+    * if you're using Linux, `make install` will do exactly that
+* Preinstall the binary on the local filesystem, and use the -plugin-dir flag during initialisation ([documented here](https://learn.hashicorp.com/terraform/development/running-terraform-in-automation#terraform-init-input-false-plugin-dir-usr-lib-custom-terraform-plugins)).
+* Commit the .terraform/plugins directory within the project. The resultant directory tree should look like that: 
+    ```text
+    .
+    ├── main.tf
+    ├── .terraform
+    │   └── plugins
+    │       └── linux_amd64
+    │           ├── lock.json
+    │           └── terraform-provider-dynadot
+    ├── terraform.tfstate
+    └── terraform.tfstate.backup
+    
+    ```

@@ -23,6 +23,35 @@ type ListDomainInfoResponse struct {
 	DomainInfoList []DomainInfo `xml:"ListDomainInfoContent>DomainInfoList>DomainInfo"`
 }
 
+// Response from a domain_info command
+type DomainInfoResponse struct {
+	name        xml.Name   `xml:"DomainInfoContent"`
+	SuccessCode int        `xml:"DomainInfoResponseHeader>SuccessCode"`
+	Status      string     `xml:"DomainInfoResponseHeader>Status"`
+	Error       string     `xml:"DomainInfoResponseHeader>Error"`
+	DomainInfo  DomainInfo `xml:"DomainInfoContent"`
+}
+
+// Response from a set_ns command
+type SetNameServerResponse struct {
+	SuccessCode int    `xml:"SetNsHeader>SuccessCode"`
+	Status      string `xml:"SetNsHeader>Status"`
+	Error       string `xml:"SetNsHeader>Error"`
+}
+
+// Response from a set_parking command
+type ParkDomainResponse struct {
+	SuccessCode int    `xml:"SetParkingHeader>SuccessCode"`
+	Status      string `xml:"SetParkingHeader>Status"`
+	Error       string `xml:"SetParkingHeade>Error"`
+}
+
+// Response returned when some general error happens
+type GeneralErrorResponse struct {
+	ResponseCode int    `xml:"ResponseHeader>ResponseCode"`
+	Error        string `xml:"ResponseHeader>Error"`
+}
+
 type DomainInfo struct {
 	name        xml.Name    `xml:"DomainInfo"`
 	Name        string      `xml:"Domain>Name"`
@@ -58,7 +87,7 @@ func (n *NameServers) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error
 			case "ServerName":
 				{
 					if current == nil {
-						errors.New("Encountered ServerName without first seeing ServerId")
+						return errors.New("encountered ServerName without first seeing ServerId")
 					}
 					if err := d.DecodeElement(&current.Name, &t); err != nil {
 						return err
